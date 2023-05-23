@@ -128,7 +128,8 @@ a.selectedUnit {
   text-align: right;
 }
 
-footer {
-  font-size: 16px;
-  color: darkgrey;
+a.footer {
+  text-decoration: underline;
+  color: #346b7f;
+  text-align: center;
 }

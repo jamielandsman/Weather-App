@@ -35,6 +35,16 @@ h3 {
   margin: 0 auto;
 }
 
+footer {
+  font-weight: 100;
+  font-style: italic;
+  font-size: 26px;
+  line-height: 1;
+  color: orange;
+  text-align: center;
+  margin: 0 auto;
+}
+
 .weatherbox {
   margin: 10% auto;
   max-width: 800px;
@@ -126,10 +136,4 @@ a.selectedUnit {
 .currentSearch {
   margin: 20px, auto;
   text-align: right;
-}
-
-a.footer {
-  text-decoration: underline;
-  color: #346b7f;
-  text-align: center;
 }

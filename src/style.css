@@ -127,3 +127,8 @@ a.selectedUnit {
   margin: 20px, auto;
   text-align: right;
 }
+
+footer {
+  font-size: 16px;
+  color: darkgrey;
+}

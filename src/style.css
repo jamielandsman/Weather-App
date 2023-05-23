@@ -1,0 +1,129 @@
+body {
+  background: radial-gradient(
+    827px at 47.3% 48%,
+    rgb(255, 255, 255) 0%,
+    rgb(138, 192, 216) 90%
+  );
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+h1 {
+  font-weight: 700;
+  font-size: 45px;
+  margin: 10px auto 0 auto;
+  padding: 10px 0 0 0;
+  text-align: center;
+  color: #346b7f;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 35px;
+  margin: 0;
+  color: #346b7f;
+}
+
+h3 {
+  font-weight: 300;
+  font-style: italic;
+  font-size: 26px;
+  line-height: 2;
+  color: orange;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.weatherbox {
+  margin: 10% auto;
+  max-width: 800px;
+  background-color: white;
+  padding: 30px 20px 25px 20px;
+  border-radius: 10px;
+  border: 1px solid gray;
+  top: 50%;
+  left: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.todaydescription {
+  font-weight: 300;
+  font-size: 20px;
+}
+
+.todayDetails {
+  font-weight: 300;
+  font-size: 16px;
+  text-align: right;
+  line-height: 1;
+  margin: 10px;
+  padding: 0;
+}
+
+.cfBox {
+  vertical-align: middle;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0;
+}
+
+a.fLinks {
+  text-decoration: underline;
+  color: #346b7f;
+}
+
+a.cLinks {
+  text-decoration: underline;
+  color: #346b7f;
+}
+
+a.selectedUnit {
+  text-decoration: none;
+}
+
+.today {
+  margin: 0px;
+  padding: 0;
+}
+
+.fiveDay {
+  margin: 0 15px 0 15px;
+  text-align: center;
+}
+
+.days {
+  margin: 0 15px 0 15px;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.fiveDayIcon {
+  font-size: 50px;
+  color: gray;
+  text-align: center;
+  opacity: 0.5;
+}
+
+.tempLow {
+  font-weight: lighter;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1;
+  margin: 0;
+  text-align: right;
+}
+
+.tempHigh {
+  font-weight: bolder;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1;
+  margin: 0;
+}
+
+.currentSearch {
+  margin: 20px, auto;
+  text-align: right;
+}

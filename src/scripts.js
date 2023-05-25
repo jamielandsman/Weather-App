@@ -44,7 +44,7 @@ function getUserLocation() {
       function (position) {
         storedLatitude = position.coords.latitude;
         storedLongitude = position.coords.longitude;
-        getUserTemp();
+        getWeatherData();
       },
       function (error) {
         console.error("Error getting user location:", error);
@@ -55,12 +55,12 @@ function getUserLocation() {
   }
 }
 
-function getUserTemp(response) {
+function getWeatherData(response) {
   let weatherAPIUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${storedLatitude}&lon=${storedLongitude}&appid=${apiKey}&units=metric`;
-  axios.get(weatherAPIUrl).then(getDisplayData);
+  axios.get(weatherAPIUrl).then(getTodayDisplayData);
 }
 
-function getDisplayData(response) {
+function getTodayDisplayData(response) {
   console.log(response);
 
   currentTemperature = Math.round(response.data.list[0].main.temp);
@@ -68,26 +68,23 @@ function getDisplayData(response) {
   currentLocationName = response.data.city.name;
   currentWind = Math.round(response.data.list[0].wind.speed);
   currentPop = Math.round(decimalToPercent(response.data.list[0].pop));
+  currentIcon = response.data.list[0].weather[0].icon;
 
   let temperatureElement = document.querySelector("#temperature");
   let descriptionElement = document.querySelector("#description");
   let locationElement = document.querySelector("#city");
   let windElement = document.querySelector("#todaysWind");
   let popElement = document.querySelector("#todaysPop");
+  let todayIconElement = document.querySelector("#todaysIcon");
 
   temperatureElement.innerHTML = `${currentTemperature}°`;
+  todayIconElement.innerHTML = `<img src="https://openweathermap.org/img/wn/${currentIcon}@2x.png">`;
   descriptionElement.innerHTML = `${currentDescription}`;
   locationElement.innerHTML = `${currentLocationName}`;
   windElement.innerHTML = `${currentWind}`;
   popElement.innerHTML = `${currentPop}`;
 }
-
 let currentTemperature;
-let currentDescription;
-let currentLocationName;
-let currentWind;
-let currentPop;
-
 function showFahrenheit(event) {
   event.preventDefault();
   let fahrenheitTemperature = Math.round(
@@ -126,29 +123,30 @@ celsiusLink.addEventListener("click", showCelsius);
 let currentButton = document.querySelector("#currentLocation");
 currentButton.addEventListener("click", getUserLocation);
 
-let searchForm = document.getElementById("search-form");
-let cityInput = document.getElementById("cityInput");
+function search() {
+  let searchForm = document.getElementById("search-form");
+  let locationInput = document.getElementById("searchInput");
 
-searchForm.addEventListener("submit", function (event) {
-  event.preventDefault();
+  searchForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-  let city = cityInput.value.trim();
-  let country = "US";
+    let location = locationInput.value.trim();
+    let [city, country] = location.split(",");
 
-  if (city === "") {
-    alert("Please provide a city in the US");
-    return;
-  }
-  geocodingCityCountry(city, country);
-});
-
-function geocodingCityCountry(city, country) {
-  let apiKey = "88724523008dc9e1be18f6eb6a959b67";
-  let apiUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city},${country}&appid=${apiKey}`;
-
-  axios.get(apiUrl).then(function (response) {
-    storedLatitude = response.data[0].lat;
-    storedLongitude = response.data[0].lon;
-    getUserTemp();
+    geocodingCityCountry(city, country);
   });
+
+  function geocodingCityCountry(city, country) {
+    let apiKey = "88724523008dc9e1be18f6eb6a959b67";
+    let apiUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city},${country}&appid=${apiKey}`;
+
+    axios.get(apiUrl).then(function (response) {
+      storedLatitude = response.data[0].lat;
+      storedLongitude = response.data[0].lon;
+      getWeatherData();
+    });
+  }
+
+  geocodingCityCountry("New York", "US");
 }
+search();

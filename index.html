@@ -29,10 +29,10 @@
           <input
             class="form-control me-2"
             type="search"
-            placeholder="Any US City"
+            placeholder="City, Country"
             aria-label="Search"
             autofocus="on"
-            id="cityInput"
+            id="searchInput"
           />
           <button
             class="btn btn-outline-dark"
@@ -72,7 +72,7 @@
         <div class="row today">
           <div class="col">
             <h2>
-              <i class="fa-solid fa-cloud-showers-heavy fiveDayIcon"></i>
+              <i class="fiveDayIcon" id="todaysIcon"></i>
               <span id="temperature"></span>
               <span class="cfBox"
                 ><a href="#" id="celsius" class="cLinks">C</a>|<a
@@ -84,7 +84,7 @@
               </span>
             </h2>
 
-            <span class="description" id="description"></span>
+            <span class="todaydescription" id="description"></span>
           </div>
           <div class="col todayDetails">
             <span id="todaysDate"></span>
@@ -148,8 +148,9 @@
         href="https://github.com/jamielandsman/Weather-App"
         target="_blank"
         class="footer"
-        >See Code on GitHub</a
+        >Open Source</a
       >
+      project by Jamie Landsman
     </footer>
 
     <script src="src/scripts.js"></script>

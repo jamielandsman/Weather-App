@@ -36,35 +36,33 @@ h3 {
 }
 
 footer {
-  font-weight: 100;
-  font-style: italic;
-  font-size: 26px;
-  line-height: 1;
-  color: orange;
+  font-size: 16px;
+  color: black;
+  font-weight: lighter;
+  margin: auto;
   text-align: center;
-  margin: 0 auto;
 }
 
 .weatherbox {
   margin: 10% auto;
   max-width: 800px;
-  background-color: white;
   padding: 30px 20px 25px 20px;
   border-radius: 10px;
   border: 1px solid gray;
   top: 50%;
   left: 50%;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .todaydescription {
   font-weight: 300;
   font-size: 20px;
+  text-transform: capitalize;
 }
 
 .todayDetails {
   font-weight: 300;
-  font-size: 16px;
+  font-size: 20px;
   text-align: right;
   line-height: 1;
   margin: 10px;
@@ -110,10 +108,7 @@ a.selectedUnit {
 }
 
 .fiveDayIcon {
-  font-size: 50px;
-  color: gray;
   text-align: center;
-  opacity: 0.5;
 }
 
 .tempLow {

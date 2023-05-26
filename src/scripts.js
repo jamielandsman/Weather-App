@@ -74,15 +74,11 @@ function getTodayDisplayData(response) {
   let todayIconElement = document.querySelector("#todaysIcon");
 
   temperatureElement.innerHTML = `${currentTemperature}°`;
-  todayIconElement.innerHTML = `<img src="https://openweathermap.org/img/wn/${currentIcon}@2x.png">`;
+  todayIconElement.innerHTML = `<img src="https://openweathermap.org/img/wn/${currentIcon}.png">`;
   descriptionElement.innerHTML = `${currentDescription}`;
   locationElement.innerHTML = `${currentLocationName}, ${currentLocationCountry}`;
   windElement.innerHTML = `${currentWind}`;
   popElement.innerHTML = `${currentPop}`;
-<<<<<<< Updated upstream
-}
-let currentTemperature;
-=======
 
   getTodayMessage(currentPop);
   toggleCurrentTemp(currentTemperature);
@@ -98,7 +94,6 @@ function getTodayMessage(currentPop) {
     alertMessage.innerHTML = "";
   }
 }
->>>>>>> Stashed changes
 
 function toggleCurrentTemp() {
   function showFahrenheit(event) {

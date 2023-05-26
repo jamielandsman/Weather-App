@@ -79,23 +79,22 @@ function getTodayDisplayData(response) {
   windElement.innerHTML = `${currentWind}`;
   popElement.innerHTML = `${currentPop}`;
 
-  getTodayMessage(currentIcon);
+  getTodayMessage(currentPop);
+  toggleCurrentTemp(currentTemperature);
 }
 
-function getTodayMessage(currentIcon) {
+function getTodayMessage(currentPop) {
   let alertMessage = document.querySelector("#alert");
 
-  if (currentIcon === "01d") {
-    alertMessage.innerHTML = "Perfect Weather!";
+  if (currentPop >= 50) {
+    alertMessage.innerHTML =
+      'You need an <i class="fas fa-umbrella"></i> today';
   } else {
-    alertMessage.innerHTML = "Have a great day";
+    alertMessage.innerHTML = "";
   }
 }
 
-let currentTemperature;
-
 function toggleCurrentTemp() {
-  6;
   function showFahrenheit(event) {
     event.preventDefault();
     let fahrenheitTemperature = Math.round(
@@ -135,51 +134,9 @@ function toggleCurrentTemp() {
   currentButton.addEventListener("click", getUserLocation);
 }
 
-function getUserLocation() {
-  if ("geolocation" in navigator) {
-    navigator.geolocation.getCurrentPosition(
-      function (position) {
-        storedLatitude = position.coords.latitude;
-        storedLongitude = position.coords.longitude;
-        getWeatherData();
-      },
-      function (error) {
-        console.error("Error getting user location:", error);
-      }
-    );
-  } else {
-    console.error("Geolocation is not supported by this browser.");
-  }
-}
-
 function getWeatherData(response) {
   let weatherAPIUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${storedLatitude}&lon=${storedLongitude}&appid=${apiKey}&units=metric`;
   axios.get(weatherAPIUrl).then(getTodayDisplayData);
-}
-
-function getTodayDisplayData(response) {
-  console.log(response);
-
-  currentTemperature = Math.round(response.data.list[0].main.temp);
-  currentDescription = response.data.list[0].weather[0].description;
-  currentLocationName = response.data.city.name;
-  currentWind = Math.round(response.data.list[0].wind.speed);
-  currentPop = Math.round(decimalToPercent(response.data.list[0].pop));
-  currentIcon = response.data.list[0].weather[0].icon;
-
-  let temperatureElement = document.querySelector("#temperature");
-  let descriptionElement = document.querySelector("#description");
-  let locationElement = document.querySelector("#city");
-  let windElement = document.querySelector("#todaysWind");
-  let popElement = document.querySelector("#todaysPop");
-  let todayIconElement = document.querySelector("#todaysIcon");
-
-  temperatureElement.innerHTML = `${currentTemperature}°`;
-  todayIconElement.innerHTML = `<img src="https://openweathermap.org/img/wn/${currentIcon}.png">`;
-  descriptionElement.innerHTML = `${currentDescription}`;
-  locationElement.innerHTML = `${currentLocationName}`;
-  windElement.innerHTML = `${currentWind}`;
-  popElement.innerHTML = `${currentPop}`;
 }
 
 function search() {

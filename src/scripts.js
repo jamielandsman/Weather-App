@@ -73,15 +73,29 @@ function getTodayDisplayData(response) {
   let todayIconElement = document.querySelector("#todaysIcon");
 
   temperatureElement.innerHTML = `${currentTemperature}°`;
-  todayIconElement.innerHTML = `<img src="https://openweathermap.org/img/wn/${currentIcon}@2x.png">`;
+  todayIconElement.innerHTML = `<img src="https://openweathermap.org/img/wn/${currentIcon}.png">`;
   descriptionElement.innerHTML = `${currentDescription}`;
   locationElement.innerHTML = `${currentLocationName}`;
   windElement.innerHTML = `${currentWind}`;
   popElement.innerHTML = `${currentPop}`;
+
+  getTodayMessage(currentIcon);
 }
+
+function getTodayMessage(currentIcon) {
+  let alertMessage = document.querySelector("#alert");
+
+  if (currentIcon === "01d") {
+    alertMessage.innerHTML = "Perfect Weather!";
+  } else {
+    alertMessage.innerHTML = "Have a great day";
+  }
+}
+
 let currentTemperature;
 
 function toggleCurrentTemp() {
+  6;
   function showFahrenheit(event) {
     event.preventDefault();
     let fahrenheitTemperature = Math.round(

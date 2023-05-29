@@ -1,9 +1,8 @@
 let apiKey = "88724523008dc9e1be18f6eb6a959b67";
 
-let newDate = new Date();
 function formattedDate(formatdate) {
   let date = formatdate.getDate();
-  let days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri"];
+  let days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
   let day = days[formatdate.getDay()];
   let year = formatdate.getFullYear();
   let hour = formatdate.getHours();
@@ -29,6 +28,7 @@ function formattedDate(formatdate) {
   return `${day} ${month} ${date}, ${formattedTime}`;
 }
 let todaysDate = document.querySelector("#todaysDate");
+let newDate = new Date();
 todaysDate.innerHTML = formattedDate(newDate);
 
 let storedLatitude;
@@ -80,16 +80,18 @@ function getTodayDisplayData(response) {
   windElement.innerHTML = `${currentWind}`;
   popElement.innerHTML = `${currentPop}`;
 
-  getTodayMessage(currentPop);
+  getTodayMessage(currentPop, currentTemperature, currentIcon);
   toggleCurrentTemp(currentTemperature);
 }
 
-function getTodayMessage(currentPop) {
+function getTodayMessage(currentPop, currentTemperature, currentIcon) {
   let alertMessage = document.querySelector("#alert");
-
   if (currentPop >= 50) {
-    alertMessage.innerHTML =
-      'You need an <i class="fas fa-umbrella"></i> today';
+    alertMessage.innerHTML = 'Keep <i class="fas fa-umbrella"></i> handy today';
+  } else if (currentTemperature <= 14) {
+    alertMessage.innerHTML = 'Grab those <i class="fas fa-mitten"></i> today!';
+  } else if (currentIcon === "01d") {
+    alertMessage.innerHTML = "Beautiful weather today!";
   } else {
     alertMessage.innerHTML = "";
   }

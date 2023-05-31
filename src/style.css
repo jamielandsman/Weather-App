@@ -18,13 +18,6 @@ h1 {
   color: #346b7f;
 }
 
-h2 {
-  font-weight: 600;
-  font-size: 35px;
-  margin: 0;
-  color: #346b7f;
-}
-
 h3 {
   font-weight: 300;
   font-style: italic;
@@ -69,25 +62,11 @@ footer {
 }
 
 .cfBox {
-  vertical-align: middle;
+  vertical-align: top;
   font-weight: bold;
   font-size: 16px;
   line-height: 1;
   padding: 0;
-}
-
-a.fLinks {
-  text-decoration: underline;
-  color: #346b7f;
-}
-
-a.cLinks {
-  text-decoration: underline;
-  color: #346b7f;
-}
-
-a.selectedUnit {
-  text-decoration: none;
 }
 
 .today {
@@ -104,6 +83,13 @@ a.selectedUnit {
   margin: 0 15px 0 15px;
   text-align: center;
   font-weight: bolder;
+}
+
+.today {
+  font-weight: 600;
+  font-size: 35px;
+  margin: 0;
+  color: #346b7f;
 }
 
 .fiveDayIcon {

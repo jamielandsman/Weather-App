@@ -38,6 +38,36 @@ function decimalToPercent(decimalValue) {
   return percentage;
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class=row>`;
+
+  let forecastDays = ["Thu", "Fri", "Sat"];
+
+  forecastDays.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      ` <div class="col-2">
+        <div class="forcastDay">${day}</div>
+              <img
+                src="http:openweathermap.org/img/wn/50d@2x.png"
+                alt=""
+                width="42"
+              />
+
+              <div>
+                <span class="tempLow"> 56° </span>
+                <span class="col tempHigh"> 81° </span>
+              </div>
+            </div>
+            `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function getUserLocation() {
   if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition(
@@ -82,6 +112,7 @@ function getTodayDisplayData(response) {
 
   getTodayMessage(currentPop, currentTemperature, currentIcon);
   toggleCurrentTemp(currentTemperature);
+  displayForecast();
 }
 
 function getTodayMessage(currentPop, currentTemperature, currentIcon) {

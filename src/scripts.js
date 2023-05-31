@@ -1,4 +1,4 @@
-let apiKey = "88724523008dc9e1be18f6eb6a959b67";
+let apiKey = "a7f21cd1d63d83c38a0a146ab8875ffd";
 
 function formattedDate(formatdate) {
   let date = formatdate.getDate();
@@ -33,37 +33,53 @@ todaysDate.innerHTML = formattedDate(newDate);
 
 let storedLatitude;
 let storedLongitude;
+let city;
+let country;
+
 function decimalToPercent(decimalValue) {
   var percentage = (decimalValue * 100).toFixed(2);
   return percentage;
 }
 
-function displayForecast() {
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
+  let day = days[date.getDay()];
+  return day;
+}
+
+function displayForecast(response) {
+  let forecast = response.data.daily;
+
   let forecastElement = document.querySelector("#forecast");
 
-  let forecastHTML = `<div class=row>`;
+  let forecastHTML = `<div class="row">`;
 
-  let forecastDays = ["Thu", "Fri", "Sat"];
-
-  forecastDays.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      ` <div class="col-2">
-        <div class="forcastDay">${day}</div>
-              <img
-                src="http:openweathermap.org/img/wn/50d@2x.png"
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 5) {
+      forecastHTML =
+        forecastHTML +
+        ` <div class="col-2 fiveDay">
+        <div class="forcastDay">${formatDay(forecastDay.dt)}</div>
+          
+        <img
+                src="http:openweathermap.org/img/wn/${
+                  forecastDay.weather[0].icon
+                }.png"
                 alt=""
                 width="42"
               />
 
               <div>
-                <span class="tempLow"> 56° </span>
-                <span class="col tempHigh"> 81° </span>
+                <span class="tempLow">${Math.round(forecastDay.temp.min)}</span>
+                <span class="col tempHigh">${Math.round(
+                  forecastDay.temp.max
+                )}</span>
               </div>
             </div>
             `;
+    }
   });
-
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
@@ -87,14 +103,12 @@ function getUserLocation() {
 
 function getTodayDisplayData(response) {
   console.log(response);
-
-  currentTemperature = Math.round(response.data.list[0].main.temp);
-  currentDescription = response.data.list[0].weather[0].description;
-  currentLocationName = response.data.city.name;
-  currentLocationCountry = response.data.city.country;
-  currentWind = Math.round(response.data.list[0].wind.speed);
-  currentPop = Math.round(decimalToPercent(response.data.list[0].pop));
-  currentIcon = response.data.list[0].weather[0].icon;
+  currentTemperature = Math.round(response.data.current.temp);
+  currentDescription = response.data.current.weather[0].description;
+  currentWind = Math.round(response.data.current.wind_speed);
+  currentPop = Math.round(decimalToPercent(response.data.daily[0].pop));
+  currentIcon = response.data.current.weather[0].icon;
+  forecast = response.data.daily;
 
   let temperatureElement = document.querySelector("#temperature");
   let descriptionElement = document.querySelector("#description");
@@ -106,13 +120,13 @@ function getTodayDisplayData(response) {
   temperatureElement.innerHTML = `${currentTemperature}°`;
   todayIconElement.innerHTML = `<img src="https://openweathermap.org/img/wn/${currentIcon}.png">`;
   descriptionElement.innerHTML = `${currentDescription}`;
-  locationElement.innerHTML = `${currentLocationName}, ${currentLocationCountry}`;
+  locationElement.innerHTML = `${city}, ${country}`;
   windElement.innerHTML = `${currentWind}`;
   popElement.innerHTML = `${currentPop}`;
 
   getTodayMessage(currentPop, currentTemperature, currentIcon);
   toggleCurrentTemp(currentTemperature);
-  displayForecast();
+  displayForecast(response);
 }
 
 function getTodayMessage(currentPop, currentTemperature, currentIcon) {
@@ -169,7 +183,7 @@ function toggleCurrentTemp() {
 }
 
 function getWeatherData(response) {
-  let weatherAPIUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${storedLatitude}&lon=${storedLongitude}&appid=${apiKey}&units=metric`;
+  let weatherAPIUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${storedLatitude}&lon=${storedLongitude}&exclude=hourly,minutely&appid=${apiKey}&units=metric`;
   axios.get(weatherAPIUrl).then(getTodayDisplayData);
 }
 
@@ -187,9 +201,8 @@ function search() {
   });
 
   function geocodingCityCountry(city, country) {
-    let apiKey = "88724523008dc9e1be18f6eb6a959b67";
+    let apiKey = "a7f21cd1d63d83c38a0a146ab8875ffd";
     let apiUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city},${country}&appid=${apiKey}`;
-
     axios.get(apiUrl).then(function (response) {
       storedLatitude = response.data[0].lat;
       storedLongitude = response.data[0].lon;

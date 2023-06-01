@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Weather App</title>
+    <title>Jamie's Awesome Weather App</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
@@ -35,26 +35,14 @@
             id="searchInput"
           />
           <button
-            class="btn btn-outline-dark"
+            class="btn btn-light"
             type="submit"
             id="searchLocation"
           >
             Search
           </button>
         </form>
-        <br />
-        <div class="row currentSearch">
-          <div class="col">
-            <button
-              class="btn btn-outline-secondary"
-              type="submit"
-              id="currentLocation"
-            >
-              My Current Location
-            </button>
-          </div>
-        </div>
-
+  
         <div class="row today">
           <div class="col">
             <h1 id="city"></h1>
@@ -75,22 +63,22 @@
           <div class="col todayDetails">
             <span id="todaysDate"></span>
             <br />
-            Chance of Precipitation today: <span id="todaysPop"></span>%<br />
+            Chance of Precipitation: <span id="todaysPop"></span>%<br />
             Wind Speed: <span id="todaysWind"></span> m/h
           </div>
         </div>
 <br />
+<br />
       <div id="forecast"></div>
 <br />
     <footer>
-      <a
+      Open Source
+      project by <a
         href="https://github.com/jamielandsman/Weather-App"
         target="_blank"
         class="footer"
-        >Open Source</a
-      >
-      project by Jamie Landsman
-    </footer>
+        >Jamie Landsman</a></footer>
+  </div>
 
     <script src="src/scripts.js"></script>
   </body>

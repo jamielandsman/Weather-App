@@ -1,4 +1,8 @@
-let apiKey = "1a2b7258ebd456c01aef9175dfe8b709";
+let apiKey = "4d3aa91044fe8121591c38db665cea49";
+let storedLatitude;
+let storedLongitude;
+let storedCity;
+let storedCountry;
 
 function formattedDate(formatdate) {
   let date = formatdate.getDate();
@@ -31,9 +35,6 @@ let todaysDate = document.querySelector("#todaysDate");
 let newDate = new Date();
 todaysDate.innerHTML = formattedDate(newDate);
 
-let storedLatitude;
-let storedLongitude;
-
 function decimalToPercent(decimalValue) {
   var percentage = (decimalValue * 100).toFixed(2);
   return percentage;
@@ -58,7 +59,7 @@ function displayForecast(response) {
       forecastHTML =
         forecastHTML +
         ` <div class="col-2 fiveDay">
-        <div class="forcastDay">${formatDay(forecastDay.dt)}</div>
+        <div class="forecastDay">${formatDay(forecastDay.dt)}</div>
           
         <img
                 src="http:openweathermap.org/img/wn/${
@@ -82,23 +83,6 @@ function displayForecast(response) {
   forecastElement.innerHTML = forecastHTML;
 }
 
-function getUserLocation() {
-  if ("geolocation" in navigator) {
-    navigator.geolocation.getCurrentPosition(
-      function (position) {
-        storedLatitude = position.coords.latitude;
-        storedLongitude = position.coords.longitude;
-        getWeatherData();
-      },
-      function (error) {
-        console.error("Error getting user location:", error);
-      }
-    );
-  } else {
-    console.error("Geolocation is not supported by this browser.");
-  }
-}
-
 function getTodayDisplayData(response) {
   console.log(response);
   currentTemperature = Math.round(response.data.current.temp);
@@ -118,7 +102,7 @@ function getTodayDisplayData(response) {
   temperatureElement.innerHTML = `${currentTemperature}°`;
   todayIconElement.innerHTML = `<img src="https://openweathermap.org/img/wn/${currentIcon}.png">`;
   descriptionElement.innerHTML = `${currentDescription}`;
-  locationElement.innerHTML = "WORKING ON IT...";
+  locationElement.innerHTML = `${storedCity}, ${storedCountry}`;
   windElement.innerHTML = `${currentWind}`;
   popElement.innerHTML = `${currentPop}`;
 
@@ -129,9 +113,9 @@ function getTodayDisplayData(response) {
 function getTodayMessage(currentPop, currentTemperature, currentIcon) {
   let alertMessage = document.querySelector("#alert");
   if (currentPop >= 50) {
-    alertMessage.innerHTML = 'Keep <i class="fas fa-umbrella"></i> handy today';
-  } else if (currentTemperature <= 14) {
-    alertMessage.innerHTML = 'Grab those <i class="fas fa-mitten"></i> today!';
+    alertMessage.innerHTML = 'Keep <i class="fas fa-umbrella"></i> handy';
+  } else if (currentTemperature <= 32) {
+    alertMessage.innerHTML = 'Grab those <i class="fas fa-mitten"></i>';
   } else if (currentIcon === "01d") {
     alertMessage.innerHTML = "Beautiful weather today!";
   } else {
@@ -155,19 +139,30 @@ function search() {
     let [city, country] = location.split(",");
 
     geocodingCityCountry(city, country);
+    reverseGeocode();
   });
 
   function geocodingCityCountry(city, country) {
-    let apiKey = "1a2b7258ebd456c01aef9175dfe8b709";
     let apiUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city},${country}&appid=${apiKey}`;
     axios.get(apiUrl).then(function (response) {
       storedLatitude = response.data[0].lat;
       storedLongitude = response.data[0].lon;
       getWeatherData();
+      reverseGeocode();
     });
   }
 
   geocodingCityCountry("New York", "US");
+}
+
+function reverseGeocode() {
+  let apiUrl = `https://api.openweathermap.org/geo/1.0/reverse?lat=${storedLatitude}&lon=${storedLongitude}&appid=${apiKey}`;
+
+  axios.get(apiUrl).then(function (response) {
+    storedCountry = response.data[0].country;
+    storedCity = response.data[0].local_names.en;
+    console.log(storedCity, storedCountry);
+  });
 }
 
 search();

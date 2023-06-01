@@ -1,13 +1,9 @@
 body {
-  background: radial-gradient(
-    827px at 47.3% 48%,
-    rgb(255, 255, 255) 0%,
-    rgb(138, 192, 216) 90%
-  );
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
+  background-image: url("media/bgbody.jpg");
 }
 h1 {
   font-weight: 700;
@@ -15,7 +11,7 @@ h1 {
   margin: 10px auto 0 auto;
   padding: 10px 0 0 0;
   text-align: center;
-  color: #346b7f;
+  color: yellowgreen;
 }
 
 h3 {
@@ -23,14 +19,16 @@ h3 {
   font-style: italic;
   font-size: 25px;
   line-height: 2;
-  color: orange;
+  color: yellowgreen;
   margin: 0 auto;
 }
 
-footer {
+footer,
+a {
   font-size: 16px;
-  color: black;
+  color: whitesmoke;
   font-weight: lighter;
+  padding: 40px 0px 0px 0px;
   margin: auto;
   text-align: center;
 }
@@ -40,25 +38,28 @@ footer {
   max-width: 800px;
   padding: 30px 20px 25px 20px;
   border-radius: 10px;
-  border: 1px solid gray;
+  border: 1px solid #14709e;
   top: 50%;
   left: 50%;
-  background-color: rgba(255, 255, 255, 1);
+  background-color: #14709e;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
 .todaydescription {
   font-weight: 300;
   font-size: 20px;
   text-transform: capitalize;
+  color: whitesmoke;
 }
 
 .todayDetails {
   font-weight: 300;
   font-size: 20px;
   text-align: right;
-  line-height: 1;
+  line-height: 1.25;
   margin: 10px;
   padding: 0;
+  color: whitesmoke;
 }
 
 .cfBox {
@@ -69,27 +70,25 @@ footer {
   padding: 0;
 }
 
-.today {
-  margin: 0px;
-  padding: 0;
-}
-
 .fiveDay {
   margin: 0 15px 0 10px;
   text-align: center;
+  color: whitesmoke;
 }
 
 .days {
   margin: 0 15px 0 15px;
   text-align: center;
   font-weight: bolder;
+  color: whitesmoke;
 }
 
 .today {
   font-weight: 600;
   font-size: 35px;
   margin: 0;
-  color: #346b7f;
+  color: whitesmoke;
+  padding: 0;
 }
 
 .fiveDayIcon {
@@ -99,18 +98,29 @@ footer {
 .tempLow {
   font-weight: lighter;
   font-style: italic;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1;
   margin: 0;
   text-align: right;
+  color: whitesmoke;
+}
+
+.forecastDay {
+  font-weight: bolder;
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1;
+  margin: 0;
+  color: whitesmoke;
 }
 
 .tempHigh {
   font-weight: bolder;
   font-style: italic;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1;
   margin: 0;
+  color: whitesmoke;
 }
 
 .currentSearch {

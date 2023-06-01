@@ -132,13 +132,13 @@ function search() {
   let searchForm = document.getElementById("search-form");
   let locationInput = document.getElementById("searchInput");
 
-  searchForm.addEventListener("submit", function (event) {
+  searchForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     let location = locationInput.value.trim();
     let [city, country] = location.split(",");
 
-    geocodingCityCountry(city, country);
+    await geocodingCityCountry(city, country);
     reverseGeocode();
   });
 
@@ -148,7 +148,6 @@ function search() {
       storedLatitude = response.data[0].lat;
       storedLongitude = response.data[0].lon;
       getWeatherData();
-      reverseGeocode();
     });
   }
 

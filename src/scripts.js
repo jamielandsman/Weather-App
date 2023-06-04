@@ -132,13 +132,18 @@ function search() {
   let searchForm = document.getElementById("search-form");
   let locationInput = document.getElementById("searchInput");
 
-  searchForm.addEventListener("submit", function (event) {
+  searchForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     let location = locationInput.value.trim();
     let [city, country] = location.split(",");
 
+<<<<<<< HEAD
     geocodingCityCountry(city, country);
+=======
+    await geocodingCityCountry(city, country);
+    reverseGeocode();
+>>>>>>> parent of 23a5614 (still)
   });
 
   function geocodingCityCountry(city, country) {

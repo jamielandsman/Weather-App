@@ -150,8 +150,6 @@ function search() {
       getWeatherData();
     });
   }
-
-  geocodingCityCountry("New York", "US");
 }
 
 function reverseGeocode() {
@@ -167,3 +165,4 @@ function reverseGeocode() {
 }
 
 search();
+geocodingCityCountry("New York", "US");

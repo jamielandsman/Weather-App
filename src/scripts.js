@@ -147,6 +147,8 @@ function search() {
     axios.get(apiUrl).then(function (response) {
       storedLatitude = response.data[0].lat;
       storedLongitude = response.data[0].lon;
+      let locationElement = document.querySelector("#city");
+      locationElement.innerHTML = `${storedCity}, ${storedCountry}`;
       getWeatherData();
     });
   }

@@ -149,6 +149,8 @@ function search() {
       getWeatherData();
     });
   }
+
+  geocodingCityCountry("New York", "US");
 }
 
 /*

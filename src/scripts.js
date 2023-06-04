@@ -132,13 +132,14 @@ function search() {
   let searchForm = document.getElementById("search-form");
   let locationInput = document.getElementById("searchInput");
 
-  searchForm.addEventListener("submit", function (event) {
+  searchForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     let location = locationInput.value.trim();
     let [city, country] = location.split(",");
 
-    geocodingCityCountry(city, country);
+    await geocodingCityCountry(city, country);
+    reverseGeocode();
   });
 
   function geocodingCityCountry(city, country) {
@@ -147,11 +148,11 @@ function search() {
       storedLatitude = response.data[0].lat;
       storedLongitude = response.data[0].lon;
       getWeatherData();
+      geocodingCityCountry("New York", "US");
     });
   }
 }
 
-/*
 function reverseGeocode() {
   let apiUrl = `https://api.openweathermap.org/geo/1.0/reverse?lat=${storedLatitude}&lon=${storedLongitude}&appid=${apiKey}`;
 
@@ -163,6 +164,5 @@ function reverseGeocode() {
   let locationElement = document.querySelector("#city");
   locationElement.innerHTML = `${storedCity}, ${storedCountry}`;
 }
-*/
 
 search();

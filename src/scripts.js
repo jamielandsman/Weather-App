@@ -148,6 +148,7 @@ function search() {
       storedLatitude = response.data[0].lat;
       storedLongitude = response.data[0].lon;
       getWeatherData();
+      geocodingCityCountry("New York", "US");
     });
   }
 }
@@ -165,4 +166,3 @@ function reverseGeocode() {
 }
 
 search();
-geocodingCityCountry("New York", "US");

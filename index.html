@@ -23,9 +23,14 @@
   </head>
 
   <body>
+    <span id="todaysDate" class="userTime"></span>
     <div class="container">
       <div class="weatherbox">
+     
+        
+    
         <form class="d-flex" id="search-form">
+          
           <input
             class="form-control me-2"
             type="text"
@@ -48,7 +53,7 @@
             <h1 id="city">New York, US</h1>
           </div>
         </div>
-
+<br/>
         <div class="row today">
           <div class="col">
             <span class="today">
@@ -61,7 +66,7 @@
             <h3 id="alert"></h3>
           </div>
           <div class="col todayDetails">
-            <span id="todaysDate"></span>
+            <span id="localTime" class="todayDetails">HOLD FOR LOCAL TIME</span>
             <br />
             Chance of Precipitation: <span id="todaysPop"></span>%<br />
             Wind Speed: <span id="todaysWind"></span> m/h

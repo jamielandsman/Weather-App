@@ -94,7 +94,7 @@ function getTodayDisplayData(response) {
 
   let temperatureElement = document.querySelector("#temperature");
   let descriptionElement = document.querySelector("#description");
-  let locationElement = document.querySelector("#city");
+
   let windElement = document.querySelector("#todaysWind");
   let popElement = document.querySelector("#todaysPop");
   let todayIconElement = document.querySelector("#todaysIcon");
@@ -102,7 +102,7 @@ function getTodayDisplayData(response) {
   temperatureElement.innerHTML = `${currentTemperature}°`;
   todayIconElement.innerHTML = `<img src="https://openweathermap.org/img/wn/${currentIcon}.png">`;
   descriptionElement.innerHTML = `${currentDescription}`;
-  locationElement.innerHTML = `${storedCity}, ${storedCountry}`;
+
   windElement.innerHTML = `${currentWind}`;
   popElement.innerHTML = `${currentPop}`;
 
@@ -132,14 +132,13 @@ function search() {
   let searchForm = document.getElementById("search-form");
   let locationInput = document.getElementById("searchInput");
 
-  searchForm.addEventListener("submit", async function (event) {
+  searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
     let location = locationInput.value.trim();
     let [city, country] = location.split(",");
 
-    await geocodingCityCountry(city, country);
-    reverseGeocode();
+    geocodingCityCountry(city, country);
   });
 
   function geocodingCityCountry(city, country) {
@@ -148,6 +147,7 @@ function search() {
       storedLatitude = response.data[0].lat;
       storedLongitude = response.data[0].lon;
       getWeatherData();
+      reverseGeocode();
     });
   }
 
@@ -160,6 +160,9 @@ function reverseGeocode() {
   axios.get(apiUrl).then(function (response) {
     storedCountry = response.data[0].country;
     storedCity = response.data[0].local_names.en;
+    let locationElement = document.querySelector("#city");
+    locationElement.innerHTML = `${storedCity}, ${storedCountry}`;
+
     console.log(storedCity, storedCountry);
   });
 }

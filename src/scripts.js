@@ -85,20 +85,37 @@ function displayForecast(response) {
 
 function getTodayDisplayData(response) {
   console.log(response);
+
   currentTemperature = Math.round(response.data.current.temp);
   currentDescription = response.data.current.weather[0].description;
   currentWind = Math.round(response.data.current.wind_speed);
   currentPop = Math.round(decimalToPercent(response.data.daily[0].pop));
   currentIcon = response.data.current.weather[0].icon;
   forecast = response.data.daily;
+  timeZone = response.data.timezone;
+
+  let options = {
+      timeZone: "Europe/London",
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    },
+    formatter = new Intl.DateTimeFormat([], options);
+
+  let formattedTime = formatter.format(new Date());
+
+  console.log(formattedTime);
 
   let temperatureElement = document.querySelector("#temperature");
   let descriptionElement = document.querySelector("#description");
-
   let windElement = document.querySelector("#todaysWind");
   let popElement = document.querySelector("#todaysPop");
   let todayIconElement = document.querySelector("#todaysIcon");
+  let weatherTime = document.querySelector("#localTime");
 
+  weatherTime.innerHTML = `${formattedTime}`;
   temperatureElement.innerHTML = `${currentTemperature}°`;
   todayIconElement.innerHTML = `<img src="https://openweathermap.org/img/wn/${currentIcon}.png">`;
   descriptionElement.innerHTML = `${currentDescription}`;

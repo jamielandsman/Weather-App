@@ -95,7 +95,7 @@ function getTodayDisplayData(response) {
   timeZone = response.data.timezone;
 
   let options = {
-      timeZone: "Europe/London",
+      timeZone: timeZone,
       year: "numeric",
       month: "numeric",
       day: "numeric",
@@ -105,8 +105,6 @@ function getTodayDisplayData(response) {
     formatter = new Intl.DateTimeFormat([], options);
 
   let formattedTime = formatter.format(new Date());
-
-  console.log(formattedTime);
 
   let temperatureElement = document.querySelector("#temperature");
   let descriptionElement = document.querySelector("#description");
